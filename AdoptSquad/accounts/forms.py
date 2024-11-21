@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
 from AdoptSquad.accounts.models import AppUser
@@ -17,10 +18,12 @@ class AppUserCreationForm(UserCreationForm):
             field.widget.attrs['placeholder'] = field.label
 
 
-class AppUserChangeForm(FormFieldMixin, UserChangeForm):
+class AppUserChangeForm(FormFieldMixin, forms.ModelForm):
     class Meta:
         model = AppUser
-        fields = '__all__'
+        fields = ('username', 'email', 'profile_picture')
+
+    profile_picture = forms.ImageField(required=False)
 
 
 class AppUserAuthenticationForm(FormFieldMixin, AuthenticationForm):

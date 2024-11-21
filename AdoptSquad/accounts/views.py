@@ -1,9 +1,9 @@
 from django.contrib.auth import login, get_backends
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
-from AdoptSquad.accounts.forms import AppUserAuthenticationForm, AppUserCreationForm
+from AdoptSquad.accounts.forms import AppUserAuthenticationForm, AppUserCreationForm, AppUserChangeForm
 from AdoptSquad.accounts.models import AppUser
 
 
@@ -38,3 +38,23 @@ class AppUserRegisterView(CreateView):
         login(request=self.request, user=self.object, backend='AdoptSquad.accounts.backends.EmailOrUsernameBackend')
 
         return response
+
+
+class AppUserDetailsView(DetailView):
+    model = AppUser
+    template_name = 'accounts/account-details.html'
+
+
+class AppUserUpdateView(UpdateView):
+    model = AppUser
+    template_name = 'accounts/account-edit.html'
+    form_class = AppUserChangeForm
+
+    def get_success_url(self):
+        return reverse_lazy('user details', kwargs={'pk': self.request.user.pk})
+
+
+class AppUserDeleteView(DeleteView):
+    model = AppUser
+    success_url = reverse_lazy('home')
+    template_name = 'accounts/user_confirm_delete.html'

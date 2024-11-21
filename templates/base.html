@@ -48,9 +48,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact us</a>
                     </li>
+                    {% if request.user.is_staff %}
                     <li class="nav-item">
                         <a class="nav-link" href="#">Messages</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
 
@@ -66,7 +68,7 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Profile</a>
+                            <a class="nav-link" href="{% url 'user details' request.user.pk %}">Profile</a>
                         </li>
                         <li class="nav-item">
                             <form method='post' action="{% url 'logout' %}">
@@ -85,11 +87,11 @@
         {% endblock %}
     </main>
 
-    <footer class="text-white w-100 py-3 bg-success-emphasis position-absolute bottom-0">
-        <div class="container text-center">
-            <span>© 2024 - All Rights Reserved</span>
-        </div>
-    </footer>
+{#    <footer class="text-white w-100 py-3 bg-success-emphasis position-relative bottom-0">#}
+{#        <div class="container text-center">#}
+{#            <span>© 2024 - All Rights Reserved</span>#}
+{#        </div>#}
+{#    </footer>#}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
