@@ -1,0 +1,18 @@
+body {
+    background-color: #fde8ce;
+    background-color: #F6F7C4;
+}
+
+nav {
+    background-color: #E8ECD7;
+}
+
+.nav-logo {
+    max-height: 150px;
+    max-width: 150px;
+}
+
+nav li {
+    margin-left: 0.7em;
+    margin-right: 0.7em;
+}
