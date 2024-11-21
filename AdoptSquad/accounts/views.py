@@ -3,12 +3,13 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from AdoptSquad.accounts.forms import AppUserCreationForm
+from AdoptSquad.accounts.forms import AppUserAuthenticationForm, AppUserCreationForm
 from AdoptSquad.accounts.models import AppUser
 
 
 class AppUserLoginView(LoginView):
     template_name = 'accounts/login.html'
+    authentication_form = AppUserAuthenticationForm
 
     def form_valid(self, form):
         """Override form_valid to explicitly set the backend."""

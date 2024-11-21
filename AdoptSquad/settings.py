@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 MY_APPS = [
     'AdoptSquad.pets.apps.PetsConfig',
     'AdoptSquad.accounts.apps.AccountsConfig',
+    'AdoptSquad.common.apps.CommonConfig',
 ]
 
 INSTALLED_APPS = [
