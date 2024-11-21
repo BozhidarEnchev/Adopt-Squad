@@ -19,8 +19,8 @@
 
             <div class="col-3 d-flex align-items-center">
                 <a href="{% url 'home' %}" class="nav-brand me-2 rounded-circle"><img class="nav-logo rounded-circle"
-                                                                       src="{% static 'images/logo.jpg' %}"
-                                                                       alt="Adopt Squad Logo"></a>
+                                                                                      src="{% static 'images/logo.jpg' %}"
+                                                                                      alt="Adopt Squad Logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-content"
                         aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -56,15 +56,25 @@
 
             <div class="collapse navbar-collapse col-3 justify-content-end" id="nav-account-options">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Log in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Log out</a>
-                    </li>
+                    {% if not request.user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Log in</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <form method='post' action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button class="nav-link">Logout</button>
+                            </form>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
