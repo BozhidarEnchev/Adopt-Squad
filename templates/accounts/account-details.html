@@ -4,9 +4,9 @@
     <div class="container row justify-content-center">
         <div class="card col-6 m-3 p-3 row rounded-4">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-4  profile-picture">
                     {% if appuser.profile_picture %}
-                        <img src="{{ appuser.profile_picture }}" class="img-fluid rounded-circle" alt="prof-pic">
+                        <img src="{{ appuser.profile_picture.url }}" class="img-fluid rounded-circle" alt="prof-pic">
                     {% else %}
                         <img src="{% static 'images/profile-pic.jpg' %}" class="img-fluid rounded-circle"
                              alt="prof-pic">

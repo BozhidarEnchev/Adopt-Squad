@@ -16,6 +16,8 @@ from django.urls import reverse_lazy
 
 import AdoptSquad.pets.apps
 
+# import cloudinary_storage
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +39,8 @@ MY_APPS = [
     'AdoptSquad.pets.apps.PetsConfig',
     'AdoptSquad.accounts.apps.AccountsConfig',
     'AdoptSquad.common.apps.CommonConfig',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 INSTALLED_APPS = [
@@ -149,3 +153,14 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'

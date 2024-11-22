@@ -1,5 +1,6 @@
 from django.contrib.auth import login, get_backends
 from django.contrib.auth.views import LoginView
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
