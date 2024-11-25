@@ -26,5 +26,5 @@ urlpatterns = [
     path('accounts/', include('AdoptSquad.accounts.urls')),
 ]
 
-if settings.DEBUG:  # Only needed in development (when DEBUG=True)
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

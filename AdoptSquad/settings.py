@@ -16,8 +16,6 @@ from django.urls import reverse_lazy
 
 import AdoptSquad.pets.apps
 
-# import cloudinary_storage
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mv*n2e3z3u!l7u!6xjh2ueos=ea43)4$lps9q!f970d$rhk+_a'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,8 +37,6 @@ MY_APPS = [
     'AdoptSquad.pets.apps.PetsConfig',
     'AdoptSquad.accounts.apps.AccountsConfig',
     'AdoptSquad.common.apps.CommonConfig',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 INSTALLED_APPS = [
@@ -154,13 +150,6 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUD_NAME'),
-    'API_KEY': config('API_KEY'),
-    'API_SECRET': config('API_SECRET'),
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
