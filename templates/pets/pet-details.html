@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container row justify-content-center">
+        <div class="card col-6 m-3 p-3 row rounded-4">
+            <div class="row g-0">
+                <div class="col-md-4  profile-picture">
+                    <img src="{{ object.pet_picture.url }}" class="img-fluid rounded-circle" alt="pet-pic">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Pet Details</h4>
+                        <div class="fields my-4">
+                            <p class="card-text"><b>Name:</b> {{ object.name }}</p>
+                            <p class="card-text">
+                                {% if object.years %}
+                                    <span>{{ object.years }} years</span>
+                                {% endif %}
+                                {% if object.years and object.months %}
+                                    <span> and </span>
+                                {% endif %}
+                                {% if object.months %}
+                                    <span>{{ object.months }} months </span>
+                                {% endif %}
+                                old
+                            </p>
+                            <p class="card-text">Personality: {{ object.personality }}</p>
+                        </div>
+                        {% if request.user.is_staff %}
+                            {% if pet_type == 'dog' %}
+                                <a href="{% url 'dogs-edit' object.pk %}" class="btn btn-warning">Edit</a>
+                                <a href="{% url 'dogs-delete' object.pk %}" class="btn btn-danger">Delete</a>
+                            {% elif pet_type == 'cat' %}
+                                <a href="{% url 'cats-edit' object.pk %}" class="btn btn-warning">Edit</a>
+                                <a href="{% url 'cats-delete' object.pk %}" class="btn btn-danger">Delete</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

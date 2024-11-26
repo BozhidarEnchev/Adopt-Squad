@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AdoptSquad.common.urls')),
     path('accounts/', include('AdoptSquad.accounts.urls')),
+    path('pets/', include('AdoptSquad.pets.urls')),
 ]
 
 if settings.DEBUG:

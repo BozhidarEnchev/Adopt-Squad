@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container row">
+        {% if request.user.is_staff %}
+            {% if pet_type == 'cat' %}
+                <a class="btn btn-warning" href="{% url 'cats-register' %}">Register Cat</a>
+            {% elif pet_type == 'dog' %}
+                <a class="btn btn-warning" href="{% url 'dogs-register' %}">Register Dog</a>
+            {% endif %}
+        {% endif %}
+        {% for pet in object_list %}
+
+            <div class="card col-4 m-3 p-3 row rounded-4">
+                <div class="row g-0">
+                    <div class="col-md-4  profile-picture">
+                        <img src="{{ pet.pet_picture.url }}" class="img-fluid" alt="pet-pic">
+                    </div>
+                    <div class="col-md-8">
+                        {% if pet_type == 'cat' %}
+                            <a href="{% url 'cats-details' pet.pk %}" class="btn btn-warning">Details</a>
+                        {% elif pet_type == 'dog' %}
+                            <a href="{% url 'dogs-details' pet.pk %}" class="btn btn-warning">Details</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
