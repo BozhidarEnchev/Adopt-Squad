@@ -45,14 +45,18 @@ class CatsUpdateView(UpdateView):
     model = Cat
     template_name = 'pets/pet-form.html'
     form_class = CatUpdateForm
-    success_url = reverse_lazy('cats-list')
+
+    def get_success_url(self):
+        return reverse_lazy('dogs-details', kwargs={'pk': self.object.pk})
 
 
 class DogsUpdateView(UpdateView):
     model = Dog
     template_name = 'pets/pet-form.html'
     form_class = DogUpdateForm
-    success_url = reverse_lazy('dogs-list')
+
+    def get_success_url(self):
+        return reverse_lazy('dogs-details', kwargs={'pk': self.object.pk})
 
 
 class CatsDeleteView(DeleteView):
@@ -87,4 +91,3 @@ class DogsDetailView(DetailView):
         context['pet_type'] = 'dog'
 
         return context
-

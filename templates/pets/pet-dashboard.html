@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cloudinary %}
 {% block content %}
-    <div class="container row">
+    <div class="container row justify-content-spacebetween">
         {% if request.user.is_staff %}
             {% if pet_type == 'cat' %}
                 <a class="btn btn-warning" href="{% url 'cats-register' %}">Register Cat</a>
@@ -11,18 +12,18 @@
         {% endif %}
         {% for pet in object_list %}
 
-            <div class="card col-4 m-3 p-3 row rounded-4">
-                <div class="row g-0">
-                    <div class="col-md-4  profile-picture">
-                        <img src="{{ pet.pet_picture.url }}" class="img-fluid" alt="pet-pic">
-                    </div>
-                    <div class="col-md-8">
-                        {% if pet_type == 'cat' %}
-                            <a href="{% url 'cats-details' pet.pk %}" class="btn btn-warning">Details</a>
-                        {% elif pet_type == 'dog' %}
-                            <a href="{% url 'dogs-details' pet.pk %}" class="btn btn-warning">Details</a>
-                        {% endif %}
-                    </div>
+            <div class="card col-4 m-3 p-3 row rounded-4 row g-2">
+                <div class="col-md-12 pet-picture d-flex justify-content-center">
+                    {% cloudinary pet.pet_picture.url quality='auto' width=300 height=300 crop='fill' alt='pet-pic' %}
+                </div>
+                <div class="col-md-12 d-flex justify-content-center">
+                    {% if pet_type == 'cat' %}
+                        <a href="{% url 'cats-details' pet.pk %}" class="btn btn-warning">
+                    {% elif pet_type == 'dog' %}
+                        <a href="{% url 'dogs-details' pet.pk %}" class="btn btn-warning">
+                    {% endif %}
+                    Details
+                    </a>
                 </div>
             </div>
         {% endfor %}

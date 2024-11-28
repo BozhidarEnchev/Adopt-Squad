@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.db import models
 
 from AdoptSquad.pets.choices import PersonalityChoices
@@ -18,10 +19,12 @@ class PetBase(models.Model):
         null=True,
     )
 
-    pet_picture = models.ImageField(
-        upload_to='adopt-squad/pet-pictures/',
+    pet_picture = CloudinaryField(
+        'image',
         blank=True,
         null=True,
+        folder='adopt-squad/pet-pictures',
+        format='png',
     )
 
     personality = models.CharField(
