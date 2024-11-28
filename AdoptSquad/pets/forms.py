@@ -1,27 +1,37 @@
 from django import forms
 
+from AdoptSquad.common.mixins import FormFieldMixin
 from AdoptSquad.pets.models import Dog, Cat
 
 
-class DogCreateForm(forms.ModelForm):
+class DogBaseForm(FormFieldMixin, forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['leash_trained'].widget.attrs.update({'class': 'form-check-input'})
+
     class Meta:
         model = Dog
         fields = '__all__'
 
 
-class CatCreateForm(forms.ModelForm):
+class DogCreateForm(DogBaseForm):
+    pass
+
+
+class DogUpdateForm(DogBaseForm):
+    pass
+
+
+class CatBaseForm(FormFieldMixin, forms.ModelForm):
     class Meta:
         model = Cat
         fields = '__all__'
 
 
-class DogUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Dog
-        fields = '__all__'
+class CatCreateForm(CatBaseForm):
+    pass
 
 
-class CatUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Cat
-        fields = '__all__'
+class CatUpdateForm(CatBaseForm):
+    pass
