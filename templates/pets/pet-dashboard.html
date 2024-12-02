@@ -2,13 +2,15 @@
 {% load static %}
 {% load cloudinary %}
 {% block content %}
-    <div class="container row justify-content-spacebetween">
+    <div class="container row justify-content-center">
         {% if request.user.is_staff %}
-            {% if pet_type == 'cat' %}
-                <a class="btn btn-warning" href="{% url 'cats-register' %}">Register Cat</a>
-            {% elif pet_type == 'dog' %}
-                <a class="btn btn-warning" href="{% url 'dogs-register' %}">Register Dog</a>
-            {% endif %}
+            <div class="register-buttons row justify-content-center mt-2">
+                {% if pet_type == 'cat' %}
+                    <a class="btn btn-warning w-auto" href="{% url 'cats-register' %}">Register Cat</a>
+                {% elif pet_type == 'dog' %}
+                    <a class="btn btn-warning w-auto" href="{% url 'dogs-register' %}">Register Dog</a>
+                {% endif %}
+            </div>
         {% endif %}
         {% for pet in object_list %}
 
