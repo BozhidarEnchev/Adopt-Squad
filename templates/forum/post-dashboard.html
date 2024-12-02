@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cloudinary %}
+{% block content %}
+    <div class="container row justify-content-center">
+    {% if request.user.is_authenticated %}
+        <a href="" class="btn btn-success w-auto">Create post</a>
+    {% endif %}
+        {% for post in object_list %}
+            <div class="card col-6 m-3 p-3 row rounded-4 row g-2">
+                <h5>post.title</h5>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
