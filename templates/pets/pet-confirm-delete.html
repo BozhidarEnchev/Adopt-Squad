@@ -7,7 +7,12 @@
                 {% csrf_token %}
                 <p>Are you sure you want to delete {{ object }}?</p>
                 <button type="submit" class="btn btn-danger">Confirm Delete</button>
-                <a href="{% url 'user details' request.user.pk %}" class="btn">Cancel</a>
+                {% if pet_type == 'dog' %}
+                    <a href="{% url 'dogs-details' object.pk %}" class="btn">
+                {% elif pet_type == 'cat' %}
+                    <a href="{% url 'cats-details' object.pk %}" class="btn">
+                {% endif %}
+                Cancel</a>
             </form>
         </div>
     </div>

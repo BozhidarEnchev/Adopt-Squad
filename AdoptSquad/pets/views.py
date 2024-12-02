@@ -2,29 +2,18 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from AdoptSquad.pets.forms import CatCreateForm, DogCreateForm, DogUpdateForm, CatUpdateForm
+from AdoptSquad.pets.mixins import CatBaseViewMixin, DogBaseViewMixin
 from AdoptSquad.pets.models import Cat, Dog
 
 
-class CatsDashboard(ListView):
+class CatsDashboard(CatBaseViewMixin, ListView):
     model = Cat
     template_name = 'pets/pet-dashboard.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['pet_type'] = 'cat'
 
-        return context
-
-
-class DogsDashboard(ListView):
+class DogsDashboard(DogBaseViewMixin, ListView):
     model = Dog
     template_name = 'pets/pet-dashboard.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['pet_type'] = 'dog'
-
-        return context
 
 
 class CatsCreateView(CreateView):
@@ -59,35 +48,23 @@ class DogsUpdateView(UpdateView):
         return reverse_lazy('dogs-details', kwargs={'pk': self.object.pk})
 
 
-class CatsDeleteView(DeleteView):
+class CatsDeleteView(CatBaseViewMixin, DeleteView):
     model = Cat
     success_url = reverse_lazy('cats-list')
     template_name = 'pets/pet-confirm-delete.html'
 
 
-class DogsDeleteView(DeleteView):
+class DogsDeleteView(DogBaseViewMixin, DeleteView):
     model = Dog
     success_url = reverse_lazy('dogs-list')
-    template_name = 'pets/pet_confirm_delete.html'
+    template_name = 'pets/pet-confirm-delete.html'
 
 
-class CatsDetailView(DetailView):
+class CatsDetailView(CatBaseViewMixin, DetailView):
     model = Cat
     template_name = 'pets/pet-details.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['pet_type'] = 'cat'
 
-        return context
-
-
-class DogsDetailView(DetailView):
+class DogsDetailView(DogBaseViewMixin, DetailView):
     model = Dog
     template_name = 'pets/pet-details.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['pet_type'] = 'dog'
-
-        return context
