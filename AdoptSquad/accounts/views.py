@@ -58,4 +58,4 @@ class AppUserUpdateView(UpdateView):
 class AppUserDeleteView(DeleteView):
     model = AppUser
     success_url = reverse_lazy('home')
-    template_name = 'accounts/user_confirm_delete.html'
+    template_name = 'accounts/user-confirm-delete.html'

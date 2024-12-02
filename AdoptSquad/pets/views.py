@@ -62,7 +62,7 @@ class DogsUpdateView(UpdateView):
 class CatsDeleteView(DeleteView):
     model = Cat
     success_url = reverse_lazy('cats-list')
-    template_name = 'pets/pet_confirm_delete.html'
+    template_name = 'pets/pet-confirm-delete.html'
 
 
 class DogsDeleteView(DeleteView):
