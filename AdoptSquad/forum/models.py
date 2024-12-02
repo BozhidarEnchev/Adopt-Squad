@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -11,10 +12,8 @@ class Post(models.Model):
         max_length=1000,
     )
 
-    image = models.ImageField(
-        blank=True,
-        null=True,
-    )
+    image = CloudinaryField('image', blank=True, null=True, folder='adopt-squad/forum-post-pictures/',
+                            format='png')
 
     author = models.ForeignKey(
         to=get_user_model(),
