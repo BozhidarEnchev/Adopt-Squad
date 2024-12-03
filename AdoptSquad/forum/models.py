@@ -21,3 +21,6 @@ class Comment(PublishableContentMixin, models.Model):
         on_delete=models.CASCADE,
         related_name='comments',
     )
+
+    def __str__(self):
+        return self.content

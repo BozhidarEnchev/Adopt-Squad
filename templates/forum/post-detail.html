@@ -14,16 +14,43 @@
                     </div>
                 {% endif %}
             </div>
+            {% if post.author == request.user or request.user.is_staff %}
+                <div class="delete-btn row justify-content-end">
+                    <a href="{% url 'post-delete' post.pk %}" class="btn btn-danger w-auto">Delete</a>
+                </div>
+            {% endif %}
         </div>
-        {% if post.author == request.user or request.user.is_staff %}
-            <div class="delete-btn row justify-content-center">
-                <a href="{% url 'post-delete' post.pk %}" class="btn btn-danger w-auto">Delete</a>
-            </div>
-        {% endif %}
-        <div class="card col-10 p-3 row rounded-4">
-            <form method="post">
 
+
+        <div class="card col-10 p-3 row rounded-4">
+
+            <form method="post" action="{% url 'comment' post.pk %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ comment_form.content.label }}
+                    {{ comment_form.content }}
+                    {{ comment_form.content.errors }}
+                </div>
+                <button class="btn btn-success mt">Submit</button>
             </form>
+
+            <div class="comments">
+                {% for comment in post.comments.all %}
+                    <div class="mt-5 border-top">
+                        <div class="comment">
+                            <h6 class="mt-4"><b>{{ comment.author }}</b></h6>
+                            <p>{{ comment.content }}</p>
+                            <p class="fs-6">{{ comment.time_of_publication }}</p>
+                        </div>
+                        {% if comment.author == request.user or request.user.is_staff %}
+                            <div>
+                                <a href="{% url 'comment-delete' comment.pk %}" class="btn btn-danger">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
         </div>
     </div>
 {% endblock %}
