@@ -6,14 +6,21 @@
         <div class="card col-10 mt-3 p-3">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-
-                {% for field in form %}
-                    <div class="mb-3">
-                        {{ field.label }}
-                        {{ field }}
-                        {{ field.errors }}
-                    </div>
-                {% endfor %}
+                <div class="mb-3">
+                    {{ form.title.label }}
+                    {{ form.title }}
+                    {{ form.title.errors }}
+                </div>
+                <div class="mb-3">
+                    {{ form.content.label }}
+                    {{ form.content }}
+                    {{ form.content.errors }}
+                </div>
+                <div class="mb-3">
+                    {{ form.image.label }}
+                    {{ form.image }}
+                    {{ form.image.errors }}
+                </div>
                 <div class="post-btn row justify-content-end mx-2">
                     <button class="btn btn-success w-auto">Post</button>
                 </div>
