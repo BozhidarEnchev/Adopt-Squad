@@ -4,7 +4,7 @@ from django.db import models
 from AdoptSquad.pets.choices import PersonalityChoices
 
 
-class PetBase(models.Model):
+class Pet(models.Model):
     name = models.CharField(
         max_length=50
     )
@@ -35,13 +35,10 @@ class PetBase(models.Model):
     def __str__(self):
         return self.name
 
-    class Meta:
-        abstract = True
 
-
-class Dog(PetBase):
+class Dog(Pet):
     leash_trained = models.BooleanField()
 
 
-class Cat(PetBase):
+class Cat(Pet):
     pass
