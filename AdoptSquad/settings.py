@@ -40,6 +40,7 @@ MY_APPS = [
     'AdoptSquad.accounts.apps.AccountsConfig',
     'AdoptSquad.common.apps.CommonConfig',
     'AdoptSquad.forum.apps.ForumConfig',
+    'AdoptSquad.gallery.apps.GalleryConfig',
 ]
 
 INSTALLED_APPS = [
