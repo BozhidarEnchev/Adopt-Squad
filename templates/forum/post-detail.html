@@ -10,7 +10,7 @@
                 {% if post.image %}
                     <div class="col-md-8 post-image">
                         {% load cloudinary %}
-                        {% cloudinary post.image.url quality='auto' height=400 crop='fill' alt='post-pic' %}
+                        {% cloudinary post.image.url quality='auto' height=300 crop='fill' alt='post-pic' %}
                     </div>
                 {% endif %}
             </div>
@@ -23,20 +23,22 @@
 
 
         <div class="card col-10 p-3 row rounded-4">
-
-            <form method="post" action="{% url 'comment' post.pk %}">
-                {% csrf_token %}
-                <div class="mb-3">
-                    {{ comment_form.content.label }}
-                    {{ comment_form.content }}
-                    {{ comment_form.content.errors }}
-                </div>
-                <button class="btn btn-success mt">Submit</button>
-            </form>
-
+            {% if request.user.is_authenticated %}
+                <form method="post" action="{% url 'comment' post.pk %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ comment_form.content.label }}
+                        {{ comment_form.content }}
+                        {{ comment_form.content.errors }}
+                    </div>
+                    <button class="btn btn-success mt">Submit</button>
+                </form>
+            {% else %}
+                <p class="text-center">Sign up to comment</p>
+            {% endif %}
             <div class="comments">
                 {% for comment in post.comments.all %}
-                    <div class="mt-5 border-top">
+                    <div class="pt-5 border-top">
                         <div class="comment">
                             <h6 class="mt-4"><b>{{ comment.author }}</b></h6>
                             <p>{{ comment.content }}</p>

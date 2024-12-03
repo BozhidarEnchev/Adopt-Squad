@@ -14,17 +14,14 @@
         {% endif %}
         {% for pet in object_list %}
 
-            <div class="card col-4 m-3 p-3 row rounded-4 row g-2">
-                <div class="col-md-12 pet-picture d-flex justify-content-center">
-                    {% cloudinary pet.pet_picture.url quality='auto' width=300 height=300 crop='fill' alt='pet-pic' %}
-                </div>
-                <div class="col-md-12 d-flex justify-content-center">
+            <div class="col-lg-4 col-12">
+                <div class="m-1 p-3 text-center">
                     {% if pet_type == 'cat' %}
-                        <a href="{% url 'cats-details' pet.pk %}" class="btn btn-warning">
+                        <a href="{% url 'cats-details' pet.pk %}">
                     {% elif pet_type == 'dog' %}
-                        <a href="{% url 'dogs-details' pet.pk %}" class="btn btn-warning">
+                        <a href="{% url 'dogs-details' pet.pk %}">
                     {% endif %}
-                    Details
+                    {% cloudinary pet.pet_picture.url quality='auto' width=300 height=300 crop='fill' alt='pet-pic' %}
                     </a>
                 </div>
             </div>
