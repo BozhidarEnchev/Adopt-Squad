@@ -9,6 +9,13 @@ class Photo(models.Model):
         format='png',
     )
 
+    pets = models.ManyToManyField(
+        to='pets.Pet',
+        related_name='photos',
+        blank=True,
+        null=True,
+    )
+
     time_of_publication = models.DateTimeField(
         auto_now_add=True,
     )

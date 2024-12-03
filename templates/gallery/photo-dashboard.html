@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cloudinary %}
+{% block content %}
+
+    {% if request.user.is_staff %}
+        <div class="post-create-btn row justify-content-center">
+            <a href="{% url 'photo-create' %}" class="btn btn-success w-auto my-4">Upload photo</a>
+        </div>
+    {% endif %}
+
+    <div class="container row justify-content-start">
+        {% for photo in photos %}
+            <div class="text-center col">
+                <img src="{{ photo.photo.url }}" alt="gallery photo" class="w-25">
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
