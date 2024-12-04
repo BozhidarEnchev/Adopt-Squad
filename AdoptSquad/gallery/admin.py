@@ -1,3 +1,7 @@
 from django.contrib import admin
+from AdoptSquad.gallery.models import Photo
 
-# Register your models here.
+
+@admin.register(Photo)
+class AdminPhoto(admin.ModelAdmin):
+    list_display = ['photo']
