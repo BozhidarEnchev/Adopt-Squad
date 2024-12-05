@@ -1,31 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="content-container row">
-    <div class="content-1 row align-items-center my-5 gap-3">
-        <img src="{% static 'images/cat1.jpg' %}" alt="cat1 background" class="col-md-6 col-12 rounded-5">
-        <div class="content-text col">
-            <h4>About us</h4>
-            <p>We are a non-profit animal rescue organization. Based in Pleven, Bulgaria, we've been rescuing
-                animals for a few years now and have found loving homes in Bulgaria, Austria, Germany and Switzerland
-                for
-                over
-                50 dogs and cats.</p>
-            <p>We're currently in the process of building a shelter. Unfortunately, until it's completed, our limited
-                space
-                makes it even more urgent to find homes for these angels.</p>
-            <p>Join the Squad and help us make a difference!</p>
-            <button class="btn flex-grow-0 see-pets-btn btn-warning btn-lg">See our pets!</button>
+    <div class="content-container row">
+        <div class="content-1 row align-items-center my-5 ">
+            <div class="content-text col-8">
+                <h1 class="f-1 fw-bold mb-4">Adopt Squad</h1>
+                <p>We are a non-profit animal rescue organization. Based in Pleven, Bulgaria, we've been rescuing
+                    animals for a few years now and have found loving homes in Bulgaria, Austria, Germany and
+                    Switzerland
+                    for
+                    over
+                    50 dogs and cats.</p>
+                <p>We're currently in the process of building a shelter. Unfortunately, until it's completed, our
+                    limited
+                    space
+                    makes it even more urgent to find homes for these angels.</p>
+                <p>Join the Squad and help us make a difference!</p>
+                <button class="btn see-pets-btn btn-warning btn-lg mt-3">Get Started!</button>
+            </div>
+        </div>
+
+        <div class="content-2 row align-items-center my-5 gap-3 fs-3">
+            <div class="content-text col text-center">
+                <p>Interested? <br> See how it all works!</p>
+                <button class="btn flex-grow-0 see-pets-btn btn-success btn-lg">Contact us!</button>
+            </div>
+            <img src="{% static 'images/dog1.jpg' %}" alt="dog1 background" class="col-md-6 col-12 rounded-5">
+
         </div>
     </div>
-
-    <div class="content-2 row align-items-center my-5 gap-3 fs-3">
-        <div class="content-text col text-center">
-            <p>Interested? <br> See how it all works!</p>
-            <button class="btn flex-grow-0 see-pets-btn btn-success btn-lg">Contact us!</button>
-        </div>
-        <img src="{% static 'images/dog1.jpg' %}" alt="dog1 background" class="col-md-6 col-12 rounded-5">
-
-    </div>
-</div>
 {% endblock %}

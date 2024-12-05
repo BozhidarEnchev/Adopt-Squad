@@ -5,9 +5,9 @@
     <div class="container row justify-content-center">
         <div class="card col-6 m-3 p-3 row rounded-4">
             <div class="row g-0">
-                <div class="col-md-8 profile-picture">
+                <div class="col-md-8 pet-pic overflow-hidden">
                     {% load cloudinary %}
-                    {% cloudinary object.pet_picture.url quality='auto' width=300 height=300 crop='fill' alt='pet-pic' %}
+                    {% cloudinary object.pet_picture.url quality='auto' height=300 crop='fill' alt='pet-pic' %}
                 </div>
                 <div class="col-md-4">
                     <div class="card-body">
@@ -18,7 +18,7 @@
 
                                 <p class="card-text">
                                     <b>Age:</b>
-                                    {% get_age object  %}
+                                    {% get_age object %}
                                 </p>
                             {% endif %}
 
@@ -34,17 +34,20 @@
                                     {% endif %}
                             {% endif %}
                         </div>
-                        {% if request.user.is_staff %}
-                            {% if pet_type == 'dog' %}
-                                <a href="{% url 'dogs-edit' object.pk %}" class="btn btn-warning">Edit</a>
-                                <a href="{% url 'dogs-delete' object.pk %}" class="btn btn-danger">Delete</a>
-                            {% elif pet_type == 'cat' %}
-                                <a href="{% url 'cats-edit' object.pk %}" class="btn btn-warning">Edit</a>
-                                <a href="{% url 'cats-delete' object.pk %}" class="btn btn-danger">Delete</a>
-                            {% endif %}
-                        {% endif %}
+
                     </div>
                 </div>
+                {% if request.user.is_staff %}
+                    <div class="admin-buttons text-center mt-2">
+                        {% if pet_type == 'dog' %}
+                            <a href="{% url 'dogs-edit' object.pk %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'dogs-delete' object.pk %}" class="btn btn-danger">Delete</a>
+                        {% elif pet_type == 'cat' %}
+                            <a href="{% url 'cats-edit' object.pk %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'cats-delete' object.pk %}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

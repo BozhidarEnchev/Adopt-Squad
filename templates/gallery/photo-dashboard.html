@@ -8,12 +8,15 @@
             <a href="{% url 'photo-create' %}" class="btn btn-success w-auto my-4">Upload photo</a>
         </div>
     {% endif %}
-
-    <div class="container row justify-content-start">
-        {% for photo in photos %}
-            <div class="text-center col">
-                <img src="{{ photo.photo.url }}" alt="gallery photo" class="w-25">
-            </div>
-        {% endfor %}
+    <div class="gallery m-4">
+        <div class="container row justify-content-start g-2">
+            {% for photo in photos %}
+                <div class="text-center col">
+                    {% cloudinary photo.photo.url quality='auto' height=400 crop='fill' alt='profile-pic' %}
+                    {#                    <img src="{{ photo.photo.url }}" alt="gallery photo" class="w-25">#}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
     </div>
 {% endblock %}

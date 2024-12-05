@@ -14,11 +14,11 @@
 
 <body>
 <div class="container-fluid p-0">
-    <nav class="navbar navbar-expand-lg bg-success-emphasis fs-3 rounded-5 rounded-top-0 shadow">
+    <nav class="navbar navbar-expand-lg bg-success-emphasis fs-5 rounded-top-0 shadow">
         <div class="container-fluid d-flex align-items-center justify-content-between">
 
-            <div class="col-3 d-flex align-items-center">
-                <a href="{% url 'home' %}" class="nav-brand me-2 rounded-circle"><img class="nav-logo rounded-circle"
+            <div class="col-2 d-flex align-items-center">
+                <a href="{% url 'home' %}" class="nav-brand rounded-circle text-decoration-none"><img class="nav-logo rounded-circle"
                                                                                       src="{% static 'images/logo.jpg' %}"
                                                                                       alt="Adopt Squad Logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-content"
@@ -27,7 +27,7 @@
                 </button>
             </div>
 
-            <div class="collapse navbar-collapse col-5 justify-content-center" id="nav-content">
+            <div class="collapse navbar-collapse col-5 justify-content-start" id="nav-content">
                 <ul class="navbar-nav text-center">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
@@ -82,11 +82,6 @@
         {% endblock %}
     </main>
 
-{#    <footer class="text-white w-100 py-3 bg-success-emphasis position-relative bottom-0">#}
-{#        <div class="container text-center">#}
-{#            <span>© 2024 - All Rights Reserved</span>#}
-{#        </div>#}
-{#    </footer>#}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
