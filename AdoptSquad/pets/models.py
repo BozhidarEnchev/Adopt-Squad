@@ -21,8 +21,6 @@ class Pet(models.Model):
 
     pet_picture = CloudinaryField(
         'image',
-        blank=True,
-        null=True,
         folder='adopt-squad/pet-pictures',
         format='png',
     )

@@ -13,7 +13,6 @@ class Photo(models.Model):
         to='pets.Pet',
         related_name='photos',
         blank=True,
-        null=True,
     )
 
     time_of_publication = models.DateTimeField(
