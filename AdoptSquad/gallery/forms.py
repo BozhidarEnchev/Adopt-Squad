@@ -12,3 +12,7 @@ class PhotoBaseForm(FormFieldMixin, forms.ModelForm):
 
 class PhotoCreateForm(PhotoBaseForm):
     pass
+
+
+class SearchBarForm(FormFieldMixin, forms.Form):
+    pet = forms.CharField()
