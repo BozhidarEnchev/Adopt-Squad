@@ -55,7 +55,7 @@ class AppUserUpdateView(AppUserPermissionMixin, UpdateView):
     form_class = AppUserChangeForm
 
     def get_success_url(self):
-        return reverse_lazy('user details', kwargs={'pk': self.request.user.pk})
+        return reverse_lazy('user details', kwargs={'pk': self.object.pk})
 
 
 class AppUserDeleteView(AppUserPermissionMixin, DeleteView):
