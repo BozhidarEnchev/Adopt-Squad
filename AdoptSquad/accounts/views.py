@@ -1,10 +1,13 @@
 from django.contrib.auth import login, get_backends
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from AdoptSquad.accounts.forms import AppUserAuthenticationForm, AppUserCreationForm, AppUserChangeForm
+from AdoptSquad.accounts.mixins import AppUserPermissionMixin
 from AdoptSquad.accounts.models import AppUser
 
 
@@ -41,12 +44,12 @@ class AppUserRegisterView(CreateView):
         return response
 
 
-class AppUserDetailsView(DetailView):
+class AppUserDetailsView(LoginRequiredMixin, DetailView):
     model = AppUser
     template_name = 'accounts/account-details.html'
 
 
-class AppUserUpdateView(UpdateView):
+class AppUserUpdateView(AppUserPermissionMixin, UpdateView):
     model = AppUser
     template_name = 'accounts/account-edit.html'
     form_class = AppUserChangeForm
@@ -55,7 +58,7 @@ class AppUserUpdateView(UpdateView):
         return reverse_lazy('user details', kwargs={'pk': self.request.user.pk})
 
 
-class AppUserDeleteView(DeleteView):
+class AppUserDeleteView(AppUserPermissionMixin, DeleteView):
     model = AppUser
     success_url = reverse_lazy('home')
     template_name = 'accounts/user-confirm-delete.html'

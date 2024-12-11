@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 
@@ -28,8 +30,14 @@ class PhotoDashboard(ListView):
         return queryset
 
 
-class PhotoCreateView(CreateView):
+class PhotoCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Photo
     success_url = reverse_lazy('gallery')
     form_class = PhotoCreateForm
     template_name = 'gallery/photo-create-form.html'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def handle_no_permission(self):
+        return HttpResponseRedirect(reverse_lazy('gallery'))

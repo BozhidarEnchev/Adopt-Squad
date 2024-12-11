@@ -1,8 +1,10 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from AdoptSquad.pets.forms import CatCreateForm, DogCreateForm, DogUpdateForm, CatUpdateForm
-from AdoptSquad.pets.mixins import CatBaseViewMixin, DogBaseViewMixin
+from AdoptSquad.pets.mixins import CatBaseViewMixin, DogBaseViewMixin, DogPermissionMixin, CatPermissionMixin
 from AdoptSquad.pets.models import Cat, Dog
 
 
@@ -16,21 +18,21 @@ class DogsDashboard(DogBaseViewMixin, ListView):
     template_name = 'pets/pet-dashboard.html'
 
 
-class CatsCreateView(CreateView):
+class CatsCreateView(CatPermissionMixin, CreateView):
     model = Cat
     template_name = 'pets/pet-form.html'
     form_class = CatCreateForm
     success_url = reverse_lazy('cats-list')
 
 
-class DogsCreateView(CreateView):
+class DogsCreateView(DogPermissionMixin, CreateView):
     model = Dog
     template_name = 'pets/pet-form.html'
     form_class = DogCreateForm
     success_url = reverse_lazy('dogs-list')
 
 
-class CatsUpdateView(UpdateView):
+class CatsUpdateView(CatPermissionMixin, UpdateView):
     model = Cat
     template_name = 'pets/pet-form.html'
     form_class = CatUpdateForm
@@ -39,7 +41,7 @@ class CatsUpdateView(UpdateView):
         return reverse_lazy('dogs-details', kwargs={'pk': self.object.pk})
 
 
-class DogsUpdateView(UpdateView):
+class DogsUpdateView(DogPermissionMixin, UpdateView):
     model = Dog
     template_name = 'pets/pet-form.html'
     form_class = DogUpdateForm
@@ -48,13 +50,13 @@ class DogsUpdateView(UpdateView):
         return reverse_lazy('dogs-details', kwargs={'pk': self.object.pk})
 
 
-class CatsDeleteView(CatBaseViewMixin, DeleteView):
+class CatsDeleteView(CatPermissionMixin, CatBaseViewMixin, DeleteView):
     model = Cat
     success_url = reverse_lazy('cats-list')
     template_name = 'pets/pet-confirm-delete.html'
 
 
-class DogsDeleteView(DogBaseViewMixin, DeleteView):
+class DogsDeleteView(DogPermissionMixin, DogBaseViewMixin, DeleteView):
     model = Dog
     success_url = reverse_lazy('dogs-list')
     template_name = 'pets/pet-confirm-delete.html'
