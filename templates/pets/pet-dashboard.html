@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container row justify-content-center g-2">
         {% if request.user.is_staff %}
-            <div class="register-buttons row justify-content-center mt-2">
+            <div class="register-buttons row justify-content-center mt-4">
                 {% if pet_type == 'cat' %}
                     <a class="btn btn-warning w-auto" href="{% url 'cats-register' %}">Register Cat</a>
                 {% elif pet_type == 'dog' %}
