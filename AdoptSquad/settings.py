@@ -14,7 +14,6 @@ from pathlib import Path
 
 import cloudinary
 from decouple import config
-from django.urls import reverse_lazy
 
 import AdoptSquad.pets.apps
 
@@ -152,8 +151,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-LOGIN_REDIRECT_URL = reverse_lazy('home')
-LOGOUT_REDIRECT_URL = reverse_lazy('home')
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 
 MEDIA_URL = 'media/'
