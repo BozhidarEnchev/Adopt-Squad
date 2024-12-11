@@ -9,7 +9,7 @@ from AdoptSquad.accounts.models import AppUser
 class AppUserPermissionMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         appuser = get_object_or_404(AppUser, pk=self.kwargs['pk'])
-        return self.request.user == appuser.pk
+        return self.request.user == appuser
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse_lazy('home'))
