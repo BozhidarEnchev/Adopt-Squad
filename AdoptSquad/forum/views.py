@@ -42,7 +42,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         post = get_object_or_404(Post, pk=self.kwargs['pk'])
-        return self.request.user == post.author
+        return self.request.user == post.author or self.request.user.is_staff
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse_lazy('post-dashboard'))
@@ -73,7 +73,7 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         comment = get_object_or_404(Comment, pk=self.kwargs['pk'])
-        return self.request.user == comment.author
+        return self.request.user == comment.author or self.request.user.is_staff
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse_lazy('post-dashboard'))
