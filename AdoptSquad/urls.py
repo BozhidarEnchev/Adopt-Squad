@@ -28,6 +28,3 @@ urlpatterns = [
     path('forum/', include('AdoptSquad.forum.urls')),
     path('gallery/', include('AdoptSquad.gallery.urls')),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
